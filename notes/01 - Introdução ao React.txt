@@ -1,0 +1,16 @@
+REACT - MATHEUS BATTISTI - HORA DE CODAR 
+Curso React: Introdução - #01
+
+-Vamos construir um gerenciador de projeto ao decorrer do curso
+
+Oque é o React? 
+
+Uma biblioteca JS (ou framework para alguns) para criação de interfaces; - Existem outras muito usadas tambem Angular, Vue.JS 
+Utilizado para construir SPAs(Single Page Application); - Um arquivo so de index rodar toda a aplicação;
+Baseado em componentes;
+Utiliza JSX para renderizar o HTML;
+E aplica o Virtual DOM para realizar as alterações de DOM;
+Podemos adicionar a um projeto ou criar um projeto com ele;
+
+
+

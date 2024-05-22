@@ -1,0 +1,60 @@
+REACT - MATHEUS BATTISTI - HORA DE CODAR 
+Curso React: Instalação - #02
+
+Como instalar o React?
+
+Para instalar vamos utilizar uma ferramenta chamada Create React App;
+Recebemos todos os arquivos da biblioteca e temos como executa-la;
+Para utilizar precisaremos do Node e tambem npm;
+Esta ferramenta tambem otimiza o app gerado para produção;
+É possivel iniciar a aplicação com npm start;
+
+https://create-react-app.dev/
+
+Ex: Criando 
+
+ npx creat-react-app my-app
+
+o npx é tipo um npm que vai rodar um script 
+creat-react-app é o script que vai rodar 
+my-app é o nome do app
+
+
+Depois de rodar, e terminar a instalação.
+
+Agora temos alguns comandos importantes apresentados:
+
+
+npm start (Inicializa o servidor de desenvolvimento)
+
+npm run build (Transforma nosso app em arquivos estaticos para produção.)
+
+npm test (Para fazer os testes da aplicação)
+
+npm run eject (Modificar os scripts do react, mudando a execução como o react funciona - Avançado)
+
+E vamos botar as opções que ele sugere: 
+
+cd meu-projeto
+npm start
+
+
+Agora vamos ver a pasta meu-projeto e dizer oque cada um faz:
+
+readme
+package.json (Onde lista as dependencias e os scripts que a gente citou)
+package-lock.json(Semelhante ao de cima)
+.gitignore(Vai ignorar alguns arquivos para levar ao git)
+node_modules(Todas as dependencias ficam aqui, e ela tambem esta no gitignore pois é uma pasta descartavel, vai ter que instalar o react na outra maquina para rodar, vão vai ser upada no github.)
+public(Algumas midias, html da nossa aplicação, logos, favicon, robos)
+scr (css, javascript da aplicação, imagens, fontes) - (Aqui dentro vai ter o arquivo base, index.js de onde vamos partir, onde faz o bootstrap de fato, ele vai importar o componente app que vai partir de tudo da aplicação, e vai estar inserindo/abrindo esse app no root. Esse documento tem a função de inicializar o React no HTML.)
+                                                      (index.css vai estar gerando estilo para aplicação toda, estilo global podemos dizer)
+                                                      (Arquivo de teste App.test.js para testar nossa aplicação)
+                                                      (App.js é oque inicializa)  
+
+E vamos mecher nesse arquivo src > App.js :
+
+Se apagarmos todo o header, vai sumir tudo da página que veio padrão, e oque vale são minhas alterações, estamos escrevendo nosso primeiro código em react.
+Deixamos o import app.css para manter as configurações css na página.
+
+Por mais que tenha muita coisa por debaixo dos panos, resumindo basicamente é um: Javascript com HTML no meio, que chama um arquivo CSS, e isso é HTML|CSS normal, assim como criamos nosso site estatico no dia a dia, sem mistério nenhum. 
