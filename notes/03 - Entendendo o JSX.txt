@@ -1,0 +1,83 @@
+REACT - MATHEUS BATTISTI - HORA DE CODAR 
+Curso React: Entendendo o JSX - #03
+
+Para encerrar o servidor do react com control+c e respondendo com yes
+E para iniciar npm start
+Se tiver algo errado, a página vai dar error.
+
+O JSX é como um HTML, porem dentro do código JavaScript; (Tudo que fazemos no HTML, fazemos no JSX com leves diferenças, possibilidade de executar codigo javascript nesse cara, tipo um template HTML dentro do JS).
+É a principal maneira de escrever HTML com o React;
+Podemos interpolar variaveis, inserindo ela entre {}; (Apenas botando o nome da variavel entre chaves).
+É possivel tambem executar funções em JSX; 
+Inserir valores em atributos de tags tambem é valido em JSX;
+
+1- Essa página App.js que estamos mechendo tem uma função chamada funcion App() onde vão ficar todas as funções
+E acima dessa função na parte externa, vamos importar os componentes, não vamos escrevelas nessa tela, mas cada uma em um arquivo (componente) e importar elas. 
+ Ex: import './App.css'
+
+2- Dentro da função vamos criar uma variavel name com o valor Matheus.
+ Ex: 
+ function App() {
+ const name = 'Matheus'
+
+ return (
+ <div className="App">
+ <h2> Alterando o JSX </h2>
+ <p> Olá, {name} </p>
+ </div>
+ )
+} 
+
+3- Abaixo da função vamos exporta-la, ja fora da função. 
+ Ex: export default App
+
+O terminal vai apontar erros e avisos caso esteja sem uma variavel sem uso por exemplo, dando vantagem a otimização do código.
+
+A lógica de a gente utilizar isso é que isso ta vindo de algum lugar (banco de dados por exemplo) ou ta processando o dado.
+
+Podemos ter funções dentro de funções tambem.
+
+No JSX uma coisa interessante, so pode haver um elemento pai, não pode haver diversos elementos no mesmo nivel no retorno, note que se tirarmos a tag div que apadrinha todas as tags dentro, vai dar erro.
+
+Na hora de definir uma class, vamos usar className pois class é um termo reservado e não pode ser usado em JSX, sempre lembrar que é className
+
+Sempre bom abrir o console do navegador tambem se não ta dando nenhum erro.
+
+
+
+Nosso código dessa aula: Na aba App.js:
+
+
+import './App.css'
+
+function App() {
+
+//O dado vem de algum lugar 
+  const name = 'Ariel'
+
+//Processando o dado (Transformando o nome em maiusculo)
+  const newName = name.toUpperCase()
+//Fazendo uma função dentro da outra
+  function sum(a, b) {
+    return a + b
+  }
+//URL em uma imagem
+const url = 'https://via.placeholder.com/150'
+
+  return (
+    <div className="App">
+     <h1>Alterando o JSX</h1>
+     <p>Olá {newName}!</p>
+     <p>Soma: {sum(1,2)}</p>
+     <img src={url} alt="Minha imagem"/>
+    </div>
+    
+  )
+}
+
+export default App;
+
+
+
+
+ 
