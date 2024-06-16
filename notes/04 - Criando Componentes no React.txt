@@ -1,0 +1,170 @@
+REACT - MATHEUS BATTISTI - HORA DE CODAR 
+Curso React: Criando componentes no React - #04
+
+Componentes: 
+
+Assim como toda aplicação em React tem JSX, ela tambem tem Componentes, são recursos fundamentais.
+
+Permite dividir a aplicação em partes - Essa é a ideia central, a arquitetura do React é pensada na componetização, dividindo nossa aplicação em diversos componentes que podem ser reutilizados em vários locais.
+
+Os componentes renderizam JSX, assim como App.js (que é um componente tambem, apesar de tudo ser centralizado nele); - Toda aplicação em React vai ter o App.Js, onde nosso foco é escrever pouco código e divida nossa aplicação em vários componentes.
+
+Precisamos criar um arquivo de componente; 
+
+E importa-lo onde precisamos utilizar; (Assim como o App.js tem o export o nosso componente tambem vai ter o export, o export é a função de poder disponibilizar o conteúdo daquele arquivo para outro.)
+
+Normalmente ficam em uma pasta chamada components; (Onde vai ficar os nossos componentes)
+
+
+Agora vamos ao Vscode:
+
+Ja da aquele npm start no terminal pra rodar o servidor 
+
+Vamos criar um novo componente dentro da pasta src
+
+Essa pasta src é onde a gente vai mecher 99% do nosso tempo, que estamos criando projeto em react.
+
+Dentro da pasta src, criaremos a pasta components, e ela vai conter nossos componentes (se quiser subdividir mais organizando pode fazer, dentro da pasta components criar uma pasta forms - que vai conter componentes de formulários)
+
+Vamos criar um componente inicial, dar o nome dele de HelloWorld.js (Quando criamos um componente, em qualquer lugar, temos que fazer as iniciais maiusculas de todas as palavras, convenção muito utilizada vamos padronizar isso nas aulas)
+
+E aqui minha missão é criar o componente para poder exportar ele e importar la no App.js que é o nosso componente central da aplicação.
+
+Dentro do HelloWorld.js vamos criar uma função, e declarar uma função é o mesmo que criar componente, é basicamente isso.
+
+E essa função geralmente é o nome do arquivo, vamos ter então essa repetição do nome HelloWorld e tambem na hora de exportar 
+
+Ex:
+
+ function HelloWorld() {
+ 
+ }
+
+ export default HelloWorld
+
+Que é a mesma coisa que vimos na aula anterior, no App.js tem uma função chamada App e um export dafault chamado App
+
+Agora vamos criar nosso JSX, com o return dentro da função, escrevendo nosso HTML dentro, e aprendemos tambem que precisamos de um wraper (elemento pai) algo que vai envolver todo nosso componente, que pode ser uma div, mas não é obrigado ser uma div, mas geralmente é.
+
+Ex:
+
+ function HelloWorld() {
+
+  return (
+   <div>
+    <h1>Meu primeiro componente</h1>
+   </div>
+  )
+ 
+ }
+
+ export default HelloWorld
+
+Agora temos nosso componente montado, e quando abrimos nosso navegador porque ele não aparece?
+
+É obvio, não chamamos ele em lugar nenhum, so criamos o arquivo
+
+E como a gente faz? Com o import no App.js 
+
+Vamos importar o arquivo que acabamos de criar no nosso App.js (Nas primeiras linhas mesmo)
+
+import NOME(geralmente é o nome do proprio arquivo/função) from LOCAL QUE TA O COMPONENTE (tenho que dizer de onde to puxando esse cara).
+
+Ex:
+
+import HelloWorld from './components/HelloWorld'
+
+Note que o React ja me da um aviso, que o HelloWorld esta definido mas não esta sendo utilizado, como utilizo o componente? 
+
+No App.js, na parte do return, no JSX: É igual escrever uma tag para chamar, abrimos e fechamos a mesma tag < /> e digitamos o nome que importamos.
+
+Ex: 
+
+<HelloWorld/>
+
+Um conceito fundamental desses caras (componentes) é que eles tem que ser reutilizaveis, podendo ser usado novamente em qualquer lugar da minha aplicação.
+
+Criamos um novo componente chamado Frase.js e vamos fazer da mesma forma, so para treinar, so que na hora de importar vamos usar o arquivo HelloWorld para jogar la dentro o import 
+
+E para ja quebrar a ideia de que so estamos importando no App.js, podemos importar em qualquer lugar, vamos usar o import dentro do componente HelloWorld que é importado la no App.js, então toda essa escadinha, vai ser transferido para a responsabilidade do App.js.
+
+E note que botamos o mesmo componente tres vezes, que não tem problema, a ideia é justamente reaproveitar varias vezes e ainda deixar ele dinâmico, por exemplo, imprimir uma frase diferente toda vez que o componente é utilizado, veremos isso mais a frente.
+
+
+
+Código do App.js:
+
+import './App.css'
+import HelloWorld from './components/HelloWorld'
+
+
+function App() {
+
+//O dado vem de algum lugar 
+  const name = 'Ariel'
+
+//Processando o dado (Transformando o nome em maiusculo)
+  const newName = name.toUpperCase()
+//Fazendo uma função dentro da outra
+  function sum(a, b) {
+    return a + b
+  }
+//URL em uma imagem
+const url = 'https://via.placeholder.com/150'
+
+  return (
+    <div className="App">
+     <h1>Alterando o JSX</h1>
+     <p>Olá {newName}!</p>
+     <HelloWorld/>
+    </div>
+    
+  )
+}
+
+export default App;
+
+--------------------------------------------
+
+Código do HelloWorld.js:
+
+import Frase from "./Frase"
+
+function HelloWorld() {
+
+    return (
+     <div>
+      <Frase/>
+      <h1>Meu primeiro componente</h1>
+      <Frase/>
+      <Frase/>
+     </div>
+    )
+   
+   }
+  
+   export default HelloWorld
+-------------------------------------
+
+Código do Frase.js:
+
+function Frase(){
+ return(
+    <div>
+        <p>Este é um componente com uma frase!</p>
+    </div>
+ )
+}
+
+export default Frase
+
+
+
+
+
+
+
+
+
+
+
