@@ -1,0 +1,155 @@
+Curso React: Trabalhando com props - #05
+
+Props (Significa propriedades)
+-As props são valores passados para componentes; (Um componente filho vai receber uma propriedade de um componente pai)
+-Podemos deixalos dinâmicos; (Imprimir uma frase diferente toda vez que puxar o componente de frase, por exemplo, isso que a props pode proporcionar para a gente)
+-Ou seja, mudando a execução por causa do valor da prop; (Em cada componente boto com uma prop com um valor diferente, deixando meus componentes dinamicos, e não mais estaticos como estavam);
+-O valor é passado como um atributo na chamada do componente; (A gente tem ali o classname para classe do html, a gente tem o src da imagem, uma prop que vamos definir como atributo do componente, podemos comparar que vai ficar tipo o atributo de uma tag, não tem nada demais.
+-E precisa ser resgatado dentro de uma propriedade/argumento chamada props na função de definição do componente; (Veremos mais alem, mas basicamente temos que ter um argumento dentro da função que a gente cria no componente chamada de props, e ai a gente pode tirar esse objeto props todas as propriedades que a gente enviou, basicamento no componente pai a gente envia varias propriedades, o componente vai condensar em uma chamada props, e ai a gente extrai todos esses valores la no componente por essa propriedade props, e props vem de propriedade, mas é o resumo.  
+-As props são somente de leitura! (Não vai ta modificando esse valor, so recebendo e utilizando).
+
+Vamos para a parte prática: Voltando ao nosso App, e tirar as coisas da aula passada vai ficar assim:
+Ex: App.js
+
+import './App.css'
+import HelloWorld from './components/HelloWorld'
+
+function App() {
+  return (
+    <div className="App">
+     <HelloWorld/>
+    </div>
+  )
+}
+
+export default App;
+
+Agora vamos criar um componente bem básico para trabalhar com props e ver oque acontece nessa transformação, em como o valor é passado para o componente filho.
+
+Vamos criar um componente novo chamado SayMyName.js (Respeitando a case das primeiras letras sempre maiusculas)
+
+E vamos colocar o nome props dentro do parenteses depois de declarar o nome da function, esse argumento chamado props, é onde vamos passar uma props para esse componente, mas pode ser mais, não tem limite, condensando uma ou mais propriedade nesse cara aqui, e vou poder acessar o props.nome da propriedade como se fosse um objeto javascript, para poder imprimir ela no HTML.
+
+Nos que damos o nome da propriedade de props.nome, para podermos tornar nosso componente dinâmico.
+
+Ex:
+ function SayMyName(props){
+
+    return(
+        <div>
+            <p>Fala aí {props.nome}, suave?</p>
+        </div>
+    )
+
+}
+
+export default SayMyName
+
+Criamos e colocamos nossa props, como vamos inserir ela para o componente filho?
+-No app.js igual fizemos antes, vamos fazer o import SayMyName from ./components/SayMyName
+-E dentro do return invocar ele em formato de tag abrindo e fechando <SayMyName />
+-E dentro da tag bota nome="Matheus", e agora estamos inserindo a propriedade que é necessária pro componente via atributo como um valor de texto.
+
+Ex App.js:
+ 
+import './App.css'
+import SayMyName from './components/SayMyName';
+
+
+function App() {
+const nome = "Maria"
+
+  return (
+    <div className="App">
+     <SayMyName nome="Ariel"/>
+     <SayMyName nome="João"/>
+     <SayMyName nome={nome}/>
+    </div>
+    
+  )
+}
+
+export default App;
+
+Note que reaproveitamos o componente de forma dinâmica
+
+Podemos fazer/passar via variavel para a propriedade nome do meu componente, igual fizemos com o exemplo Maria. 
+
+Agora vamos criar outro componente, mais complexo, com mais de uma props. - Vamos criar o componente Pessoa.js, e faz o procedimento padrão de criação de um componente que aprendemos, inserindo o props ao lado do nome da function dentro do parenteses, e vamos chamar props diferentes, nos diferentes atributos. E podemos imprimir dinamicamente os dados nos atributos, criamos o props.foto, props.nome, props.idade, props.profissão, diferentes propriedades. Todos eles vem dentro de um {}. 
+
+Ex Pessoas.js:
+
+function Pessoa(){
+    return(
+    <div>
+        <img src={props.foto} alt={props.nome} />
+        <h2>Nome: {props.nome}</h2>
+        <p>Idade: {props.idade}</p>
+        <p>Profissão: {props.profissao}</p>
+
+    </div>
+    )
+}
+export default Pessoa
+
+Componente bem mais complexo, bem mais propriedades e estou puxando do meu props.
+
+Vamos ao App.Js:
+
+Ex:
+
+import './App.css'
+import SayMyName from './components/SayMyName';
+import Pessoa from './components/Pessoa';
+
+
+function App() {
+  const nome = "Maria"
+
+  return (
+    <div className="App">
+     <SayMyName nome="Ariel"/>
+     <SayMyName nome="João"/>
+     <SayMyName nome={nome}/>
+     <Pessoa 
+     nome="Sabrina" 
+     idade="22" 
+     profissao="Psicologa" 
+     foto="https://via.placeholder.com/150"
+     />
+    </div>
+    
+  )
+}
+
+export default App;
+
+Tiramos o HelloWorld que tava começando a atrapalhar
+
+E deu tudo certo, usamos varias propriedades, mas vocês notaram que dentro do Pessoa.js tem uma repetição enorme props, props, props, props...
+
+Se eu utilizar um recurso do Javascript chamado destructuring posso estar transformando esse objeto props ja no nome da propriedade, sem precisar ficar sempre chamando esse mesmo objeto, oque vai deixar meu componente muito mais simples, como podemos fazer isso?
+
+Podemos dizer que alguns objetos que vamos receber depois de declarar o nome da função, dentro do parenteses cria uma chave { } com os nomes dentro,que vai virar alguns valores, e não vamos mais precisar do props. antes dos objetos
+
+Ex Pessoa.js:
+
+function Pessoa ({ nome, idade, profissao, foto }) {
+ return(
+   <div>
+        <img src={foto} alt={nome} />
+        <h2>Nome: {nome}</h2>
+        <p>Idade: {idade}</p>
+        <p>Profissão: {profissao}</p>
+
+    </div>
+ )
+}
+export default Pessoa 
+
+Tornando muito mais simples, muito mais legivel nosso código, economizando muita linha e tornando nossa vida mais fácil.
+So ia poluir meu HTML, e podemos resumir dessa forma utilizando destructuring.
+O props vamos usar muito no dia-a-dia no React.
+
+
+
