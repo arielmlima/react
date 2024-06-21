@@ -24,10 +24,10 @@ Muito util para mecher em configurações globais.
 
 Agora vamos aprender a fazer por componentes: Quero esses estilos nos meus componentes de Frase:
 
-- Criar o arquivo dentro da pasta components: Frase.module.css, esse arquivo me permite utilizar o css modules, escrevemos o css normal nada diferente, apenas que eu não posso criar classes com traço, usa o underline, ou maiusculas. 
-- Criamos dentro do arquivo duas classes com estilos diferentes .fraseContainer para estilizar a div e .fraseContent para o conteudo da frase
-- Depois de criar o CSS como usamos esse cara? Temos que importar, so que diferente do que a gente viu ali antes
-- No css modules na primeira linha a gente escreve por convenção: import styles from './localdoarquivo'
+- Criar o arquivo dentro da pasta components: Frase.module.css, esse arquivo me permite utilizar o css modules, escrevemos o css normal nada diferente, apenas que eu não posso criar classes com traço, usa o underline, ou maiuscula. 
+- Criamos dentro do arquivo duas classes com estilos diferentes .fraseContainer para estilizar a div e .fraseContent para o conteudo da frase, pois quisemos assim.
+- Depois de criar o CSS como usamos esses cara? Temos que importar, so que diferente do que a gente viu ali antes:
+- No Frase.js chama o css modules na primeira linha a gente escreve por convenção: import styles from './localdoarquivo'
 - No nosso Frase.js vamos a div ja criada e digitar dentro da tag: className = {styles.fraseContainer} 
 - E no App.js precisa ter o import do Frase igual como ja vinhamos fazendo: import Frase from './components/Frase'
 - E no App.js no HTML invocamos atraves do nome Frase dentro de uma mesma tag que abre e fecha: <Frase />
