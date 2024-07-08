@@ -1,0 +1,121 @@
+Curso React: Utilizando React fragments - #07
+
+Fragmentos:
+
+-React Fragments permite a criação de um componente sem elemento pai; (Não precisamos colocar aquela div que estamos colocando, simplesmente vamos colocar um placeholder, e entregar diversos elementos filhos por meio de um componente. Então eu tenho algo que retorna um elemento só, que é um requisito do react, mas ele não entrega uma tag, então não sou obrigado a colocar uma div.) 
+-O proposito é descomplicar os nós do DOM; (Não adiciono elementos HTML desnecessariamente, Simplica meu código, tem esse recurso do fragments para poder resumir meu código)
+-A sintaxe é <> e </>, não há um nome para a tag; (Essa é a simbologia que vamos utilizar, não há nome para o fragment, ou para a tag de fragment, e assim colocando isso o react vai aceitar varios elementos filhos sendo retornados de um elemento só, um grande recurso para poder fazer essa entrega de varios elementos, em vez de ter que encapsular em um).
+-Criamos no proprio JSX; (Vamos criar no JSX, não precisa importar nada, apenas colocar uma tag vazia que ele ja vai entender oque a gente ta querendo dizer).
+
+Vamos agora a prática:
+
+Vamos criar um novo component chamado List.js, na pasta components, e aqui vamos partir da nossa premissa básica: 
+-criar uma função List, um retorno, e um export default List
+ function List() {
+   return () 
+ }
+
+export default List
+
+Isso é a estrutura básica do componente.
+
+Ai por exemplo, eu não quero mandar uma div em volta dessa lista aqui como que eu posso fazer? 
+
+Forma que faziamos antes, com a div pai:
+
+ function List() {
+   return (
+<div>
+ <h1>Minha Lista</h1>
+ <ul>
+  <li>Item </li>
+  <li>Item 2</li>
+ </ul>
+</div>
+) 
+}
+export default List
+
+Usando o Fragment, usando tag vazia, simplificando o código:
+
+ function List() {
+   return (
+<>
+ <h1>Minha Lista</h1>
+ <ul>
+  <li>Item </li>
+  <li>Item 2</li>
+ </ul>
+</>
+) 
+}
+export default List
+
+E agora vamos em App.js e importamos esse cara aqui na parte que tem os imports, na parte superior do código:
+
+import List from './components/List'
+
+e la em baixo antes do fechamento da div escrevemos:
+
+<List /> Para exibir na tela do usuário.
+
+Vamos nos estilos gerais index.css e vamos dar um padding-bottom: 500px; no body, para termos mais centralização desse conteudo que adicionamos.
+
+Note que dessa forma fica igual da outra forma para o usuário escrevendo um elemento pai, e da mesma forma entregamos dois elementos, fazendo esse retorno por meio do fragments
+
+Vamos criar outro component chamado Item.js
+
+Esse item da lista vai ser baseado no fragment tambem.
+
+Item.js:
+
+function Item(props) {
+return(
+    <>
+    <li>{props.marca}</li>
+    </>
+)
+}
+
+export default Item
+
+Em list.js vamos importar na primeira linha:
+
+import Item from './Item'
+
+E vamos criar as invocações do componente, utilizando fragment com reaproveitamento de componente para mais para frente aprendermos a fazer um loop e replicar esses item, por meio de um loop. 
+
+List.js:
+
+import Item from './Item'
+function List() {
+    return (
+        <>
+            <h1>Minha Lista</h1>
+            <ul>
+                <Item marca="Ferrari" />
+                <Item marca="Fiat" />
+                <Item marca="Renault" />
+            </ul>
+        </>
+    )
+}
+export default List
+
+Ai vamos dizer que a cada fragment eu ia querer retornar tambem um paragrafo:
+
+Item.js:
+
+function Item(props) {
+return(
+    <>
+    <li>{props.marca}</li>
+    <p>Teste</p>
+    </>
+)
+}
+
+export default Item
+
+Podemos usar divs quando precisar mesmo, usar divs para agrupar, tipo cartões de pessoas, coisas que realmente vão precisar estar juntas ali.
+Quando não precisar usa o Fragments que aprendemos aqui.
