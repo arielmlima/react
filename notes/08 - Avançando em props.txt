@@ -1,0 +1,123 @@
+Avançando em props - #08
+
+Aprendendo novos recursos que vão ajudar muito a padronizar e tambem a melhorar a qualidade do nosso projeto.
+
+-Podemos definir tipos para as props, realizando uma espécie de validação; (String, Number por ai vai, melhorando o sentido de desenvolver o projeto).
+-Definimos em um objeto chamado propTypes no próprio componente; (Vamos conseguir moldar os tipos de propriedade que recebemos do componente pai)
+-E ainda há a possibilidade de definir um valor padrão (Neste caso utilizamos o objeto defaultProps;)
+
+Duas coisas que veremos: Tipos de propriedade e valor Default, ou seja não passou, manda outra valor ai padrão p esse componente que ficou sem valor.
+
+Vamos para prática que é bem interessante:
+
+Vamos continuar nos nossos componentes de List e Item e vamos aumentar o numero de informações que esses componentes recebem.
+
+Então vamos dizer que ele vai receber tambem uma propriedade chamada lançamento, e vai trazer a questao de Destructuring, tiramos o nome props e escrevemos assim:
+
+Como era antes de desestruturar: 
+
+function Item(props) {
+return(
+    <>
+    <li>{props.marca}</li>
+    <p>Teste</p>
+    </>
+)
+}
+
+export default Item
+
+Depois de desestruturar: Trazendo as duas propriedades que eu quero, marca e lançamento.
+
+Item.js:
+
+function Item({marca, ano_lancamento }) {
+return (
+ <>
+  <li>{marca} - {ano_lancamento}</li>
+ </>
+ )
+}
+
+export default Item
+
+Agora vamos no nosso componente pai e vamos passar essas que tão faltando, então botamos ano_lancamento
+
+Propriedade com number passamos entre chaves {}, e string entre aspas
+
+Agora vamos garantir que essas propriedades sejam string e number respectivamente:
+Marca sendo string e Lançamento number, como vamos fazer?
+
+Em item.js:
+
+Vamos importar o PropTypes from 'prop-types" na primeira linha, um dos pacotes que ja vem com o react.
+
+E antes do export, depois do fechamento da função, escrevemos Item.propTypes = {}
+
+La em cima colocamos propTypes com P maiusculo, mas aqui é com p minusculo pois vamos acessar a propriedade com o p minusculo, essa diferença tem que ser levada em conta senão vai dar certo, essa é uma propriedade do componente, e em cima maiusculo o P é um pacote que a gente importou, eles são diferentes, a propriedade vamos estar ativando no que estamos criando, ja para fazer a validação a gente vai fazer em baixo. 
+
+  E vai ficar assim:
+
+Item.propTypes = { 
+ marca: PropTypes.string,isRequired, 
+ ano_lancamento: PropTypes.number,
+}
+
+O isRequired diz que é obrigatório.
+
+E podemos definir tambem o valor padrão, quando não tiver um valor definido:
+
+O nosso código Item.js: 
+
+import PropTypes from 'prop-types'
+
+function Item({marca, ano_lancamento}) {
+    return (
+     <>
+      <li>{marca} - {ano_lancamento}</li>
+     </>
+     )
+    }
+    
+    Item.propType = {
+        marca: PropTypes.string,
+        ano_lancamento: PropTypes.number
+    }
+
+    Item.defaultProps = {
+        marca: 'Faltou a marca', ano_lancamento: 0,
+    }
+    
+    export default Item
+
+O isRequired sai quando definimos um defaultProps, importante saber disso.
+
+Em List.js invocamos um item sem nada definido para testar: 
+
+<Item />
+
+Código do List.js:
+
+import Item from './Item'
+function List() {
+    return (
+        <>
+            <h1>Minha Lista</h1>
+            <ul>
+                <Item marca="Ferrari" ano_lancamento={1985} />
+                <Item marca="Fiat" ano_lancamento={1964} />
+                <Item marca="Renault" ano_lancamento={1985} />
+                <Item/>
+                
+            </ul>
+        </>
+    )
+}
+export default List
+
+
+ 
+ 
+
+
+
