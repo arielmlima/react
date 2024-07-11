@@ -1,0 +1,98 @@
+Curso React: useState na prática - #10
+useState (Recurso muito interessante para a manipulação de dados com o React)
+
+O useState é um hook do React; (Nesse curso vamos conhecer diversos hooks e cada um deles tem uma função bem especifica que vai ajudar nosso sistema/nosso app mais fluído, então vamos adicionar funcionalidades que a gente teria que codificar na mão por exemplo.)
+ 
+O useState serve para manusear o estado de um componente de forma simples;(O estado é os dados que o componente esta lidando, por exemplo, com formulario vamos usar muito o useState, para poder pegar o valor do input de nome, email, de senha, enfim tudo que ele tiver manipulando de dado ali a gente vai colocar no State para poder consultar esse valor e tambem setar e modificar esse valor tudo baseado por meio desse hook aqui.)
+
+Este hook funciona muito bem com eventos; (Digo que ele funciona muito bem com eventos, podemos atrelar o evento com algum change do input quando tiver alguma modificação, para ele alterar o valor do state de tal campo, então a gente vai ter sempre o valor sendo atualizado a cada vez que o usuário digita a algum caractere por exemplo).
+
+Podemos atrelar um evento a mudança de state; (Geralmente nos inputs trabalha com onChange, mas a gente pode tambem setar esse evento com um click por exemplo, ah quero mudar meu state baseado num click não tem problema, mas no formulario uma convenção mt utilizada é o onChange, então como estamos trabalhando com formulario vamos utilizar o useState e tambem com o conceito de onChange e entender como esse cara vai funcionar nas nossas aplicações, que vamos utilizar muito no projeto que criaremos depois).
+
+
+Vamos ao vscode:
+
+Nessa aula vamos trabalhar no nosso componente do nosso formulário.
+
+Então ja temos um método que esta sendo ativado baseado no nosso submit, e vamos continuar com eles, mas vamos atualizar os campos, ter mais um campo com a senha do usuário.
+
+Quando usar "for" no formulário no JSX/React usa "htmlFor" pois como ja é uma expressão HTML, ai usamos assim para diferenciar.
+
+Exemplo: <label htmlFor="name">Nome:</label>
+
+Como vamos resgatar esses dados que o usuário digitar?
+
+A partir do Hook do react, podendo trabalhar com estado(dados recebidos) de uma forma muito mais simples. Eai vamos ter que importar esse cara que é o hook, os hooks são todos importados. Por exemplo vamos importar o hook useState do pacote "react" normal:
+
+ import { useState } from 'react' 
+
+Então ja podemos usa-lo, como fazemos geralmente?
+
+Vamos estar trabalhando com constantes, então crio duas constantes aqui, a primeira o nome do campo, o nome do que eu quero tratar e nosso elemento vai ser o input, que vou chamar de name, e que vou botar um setName, sempre tenho o nome do atributo que eu quero resgatar que vou ler , e setName seria oque eu vou alterar.
+Então vou atribuir para poder mudar o valor que ta aqui, e aqui podemos botar um useState e nesse metodo eu posso definir um valor que inicia quando o componente foi inicializado. 
+
+Claro que não vamos trabalhar dessa maneira com a senha do usuario foi mais um exemplo, mas a ideia foi trabalhar a implementação do hook useState,
+Resumindo o hook useState, sempre temos que importar esse cara, vamos criar duas constantes uma pro valor que a gente quer trabalhar e uma para a alteração desse valor, e ta atribuindo esses caras para o useState, ai quando a gente for alterar o nome ou qualquer valor que seja a gente vai dar um set (Ex: setName) baseado num campo de input ou alguma outra informação do sistema, ai quando a gente quiser pegar esse valor para enviar para o backend por exemplo, a gente vai ta trabalhando ai com a segunda variavel que é a que a gente criou aqui com o nome do proprio atributo name e sfrinks 
+
+Código: Form.js
+
+//Importando o useState
+import { useState } from 'react'
+
+function Form(){
+
+    function cadastrarUsuario(e) {
+        e.preventDefault()
+        //Utilizei o name para resgatar o valor
+       console.log(`Usuário ${name} foi cadastrado com a senha: ${password}`)
+    }
+//Usando o useState
+    const [name, setName] = useState()
+    //Tendo a possibilidade de botar Matheus como o valor default, automaticamente dando um setName em Matheus.
+    
+    const [password, setPassword] = useState()
+
+    return(
+        <div>
+            <h1>Meu cadastro</h1>
+            <form onSubmit={cadastrarUsuario}>
+                <div>
+                <label htmlFor="name">Nome:</label>
+                    <input type="text" 
+                    id="name" name="name"
+                    //Iniciar ja com o value do nome, e ai ja recebemos o nome Matheus no input, por exemplo se tivesse uma edição de formulário ja traria assim o state setado e o value aqui no atributo, dessa maneira que vamos fazer o trabalho de input nos formulários.
+                    value={name}
+                    placeholder="Digite o seu nome"
+                    //Evento onChange dando um setName(ArrowFunction) em e.target.value, faz com que cada letra que eu digite nesse campo eu modifique o valor no state, como podemos verificar isso?   Usamos o setName para atribuir o valor.
+                    onChange={(e) => setName(e.target.value) } />
+                    
+                    
+                </div>
+                <div>
+                    <label htmlFor="password">Senha:</label>
+                    <input type="password" 
+                    id="password" name="password"
+                     placeholder="Digite a sua senha" 
+                     onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <div>
+                    <input type="submit" value="Cadastrar" />
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export default Form
+
+Comentário youtube:
+
+Nesse exemplo, o useState é usado para criar um estado chamado 'nome' e inicializá-lo como 'undefined'. A função 'setNome' é usada para atualizar o valor desse estado.
+
+Quando o usuário digita algo no campo de input e aciona o evento 'onChange', a função '(e) => setNome(e.target.value)' é chamada. O evento 'onChange' é acionado sempre que o valor do campo de input muda. O parâmetro '(e)' representa o evento em si e contém informações sobre ele, como o valor digitado no campo de input.
+
+Dentro da função '(e) => setNome(e.target.value)', estamos usando 'e.target.value' para obter o valor digitado no campo de input e passá-lo para a função 'setNome'. Assim, o valor do estado nome é atualizado com o valor digitado pelo usuário.
+
+Quando o formulário é enviado, a função 'cadastrarUsuario' é chamada. Nesse exemplo, estamos apenas imprimindo no console uma mensagem com o valor atual do estado nome.
+
+Dessa forma, o useState permite armazenar e atualizar o valor digitado pelo usuário no campo de input, mantendo-o acessível para outras partes do componente ou para ser usado em outras funcionalidades.
