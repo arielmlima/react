@@ -1,0 +1,89 @@
+Curso React: Eventos no React (onClick, onChange e onSubmit) - #09
+
+-Os eventos de React são os mesmos eventos do DOM;
+-Ou seja, por exemplo temos eventos para responder a um click;
+-O evento é atrelado a uma tag que ira executa-lo;
+-Geralmente um método(função) é atribuido ao evento;
+-Este método deve ser criado no componente;
+
+Clicando no button eu vou ativar algum evento
+Agora como que eu vou escutar esse evento para ele poder ativar o método? No react, diretamente na tag escrevemos onClick que é a ação, e em sequencia ={meuEvento} que vai dizer oque vai fazer, geralmente é uma função, não colocar a função com parenteses () em sequencia senão vai invocar a função em vez de esperar o click, boto so o nome e ele vai ser executado assim que eu disparar o click nesse botão.
+
+Evento.js:
+
+function Evento({ numero }){
+
+    function meuEvento() {
+       console.log(`Opa, fui ativado! ${numero}`)
+    }
+    return (
+        <div>
+            <p>Clique aqui para disparar um evento:</p>
+            <button onClick={meuEvento}>Ativar!</button>
+        </div>
+    )
+}
+
+export default Evento
+
+Agora vamos importar esse cara la no App.js
+
+import Evento from './components/Evento'
+
+App.js:
+
+import './App.css'
+import Evento from './components/Evento'
+import Form from './components/Form';
+
+function App() {
+  
+  return (
+    <div className="App">
+     <h1>Testando Eventos</h1>
+     <Evento numero="1" />
+     <Evento numero="2" />
+     <Form />
+    </div>
+    
+  )
+}
+
+export default App;
+
+Nessa aula tambem vamos ver outros tipos de evento, por exemplo de formulario que é muito utilizado tambem
+Para formularios é mais simples trabalhar com o onSubmit que é o evento para formularios do proprio react
+Vamos criar o componente Form.js;
+
+Form.js:
+function Form(){
+
+    function cadastrarUsuario(e) {
+        e.preventDefault()
+        console.log("Cadastrou o usuário.")
+    }
+    return(
+        <div>
+            <h1>Meu cadastro</h1>
+            <form onSubmit={cadastrarUsuario}>
+                <div>
+                    <input type="text" placeholder="Digite o seu nome" />
+                </div>
+                <div>
+                    <input type="submit" value="Cadastrar" />
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export default Form
+
+
+Note que os formulários se perdem, como armazenamos isso no front-end ainda para poder utilizar essas informações? 
+Temos acesso ao "event" ou "e" para ser mais resumido, que é o evento da submissão, e podemos usar o método preventDefault()
+Ele vai parar a execução desse formulário e vai escrever oque esta escrito embaixo.
+Sempre que tiver usando um evento submit usar esse cara tambem preventDefault, ajudando a gente a concluir oque a gente precisa fazer com esse componente.
+Abra no Console do Chrome e veja que os formulários estão sendo recebidos.
+
+
