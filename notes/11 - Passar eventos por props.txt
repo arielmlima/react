@@ -1,0 +1,62 @@
+Curso React: Passar eventos por props - #11
+Metodos por props (Ou seja enviar funções por meio de propriedades)
+
+-Os métodos tambem podem ser passados por props; (Se eu tenho meu layout todo componentizado, geralmente eu posso ter um componente que não seja o pai que execute o filho. Ex: Um card de produto por exemplo no ecomerce, e tem os produtos no card e a gente quer adicionar o carrinho, então quando clico adicionar o carrinho esse botão não vai estar no componente pai que é o layout a pagina de categorias, ele vai estar no card do produto, que é o componente filho, então ele vai ter que emitir esse evento pro componente pai, então passar eventos por propriedades é interessante nesses casos e veremos isso mais a frente.)  
+-Ou seja, um componente filho pode ativar o metódo do seu ancestral ou componente pai; (
+-Vamos acessar o método por meio de um evento; (Vamos estar trabalhando com um click por exemplo, mas pode ser qualquer evento so um exemplo mesmo.)
+-A sintaxe é a mesma de uma props de dados: props.meuEvento; (Não muda nada, a diferença é que estamos invocando uma função por meio de uma propriedade.)
+
+
+Evento.js:
+
+import Button from './evento/Button'
+
+function Evento(){
+
+    function meuEvento() {
+       console.log('Ativando o primeiro evento!')
+    }
+
+    function segundoEvento () {
+        console.log('Ativando o segundo evento!')
+    }
+    return (
+        <div>
+            <p>Clique aqui para disparar um evento:</p>
+            <Button event={meuEvento}text="Primeiro Evento" />
+            <Button event={segundoEvento} text="Segundo Evento" />
+            
+           
+        </div>
+    )
+}
+export default Evento
+
+Button.js:
+
+function Button(props) {
+    //Apenas uma linha de código não precisa do parenteses 
+    return <button onClick={props.event}>{props.text}</button>
+}
+
+export default Button
+
+App.js:
+
+import './App.css'
+import Evento from './components/Evento'
+import Form from './components/Form';
+
+function App() {
+  
+  return (
+    <div className="App">
+     <h1>Testando Eventos</h1>
+     <Evento />
+     <Form />
+    </div>
+    
+  )
+}
+
+export default App;
