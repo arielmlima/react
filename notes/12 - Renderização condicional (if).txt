@@ -1,0 +1,79 @@
+ Renderização condicional (if) - #12
+
+Renderização por condição. (Exibir um conteudo baseado em um if else por exemplo).
+
+-Podemos atrelar a exibição de algum elemento a um if; (Por exemplo o usuario ta logado, boto itens na barra de navegação que antes não tinham, para ele se cadastrar e entrar no sistemas, ah ele logou aparece links, conta, meu pedidos, sair, exibindo uma coisa no template ou outra que façam sentido essa condição.)
+-Esta ação é chamada de renderização condicional; (Termo atrelado ao react)
+-Envolvemos as tags em chaves {}; (Porque? A gente viu que as chaves executam o Javascript, se estamos usando if no meio do template do jsx, isso é Javascript, e serão envolvidos de {}).
+-Como as chaves executam JavaScript, criamos nossa condição;(Não trabalhar com logicas complexas nos templates, so se precisar mesmo, lógicas simples são ideais.)
+-É possivel usar o state para criar as condições; (Não dependemos so das variaveis que vimos, podemos utilizar o state, o hook que vimos anteriormente)
+
+Vamos la para o Vscode.
+
+Criar um componente novo: Condicional.js
+
+import {useState} from 'react'
+
+function Condicional() {
+
+    const [email, setEmail] = useState()
+    const [userEmail, setUserEmail] = useState()
+
+    function enviarEmail(e) {
+        e.preventDefault()
+        setUserEmail(email)
+        console.log(userEmail)
+    }
+
+    function limparEmail(e) {
+        setUserEmail('')
+    }
+
+ return(
+    <div>
+        <h2>Cadastre o seu e-mail:</h2>
+        <form>
+            <input type="email" placeholder="Digite o seu e-mail..." onChange={(e) => setEmail(e.target.value)} />
+            <button type="submit" onClick={enviarEmail}>Enviar e-mail</button>
+            {/* Criando a condição, Se o user email for preenchido eu vou querer imprimir uma div aqui dentro */}
+            {userEmail && (
+                <div>
+                    <p>O e-mail do usuário é: {userEmail}</p>
+                    <button onClick={limparEmail}>Limpar e-mail</button>
+                </div>
+            )}
+        </form>
+        
+
+
+    </div>
+ )
+}
+
+export default Condicional
+
+App.js:
+
+import './App.css'
+import Condicional from './components/Condicional';
+
+
+function App() {
+  
+  return (
+    <div className="App">
+     <h1>Renderização Condicional</h1>
+     <Condicional />
+    </div>
+    
+  )
+}
+
+export default App;
+
+
+Explicações: Usamos chaves pois elas envolvem a lógica do código, pedindo pro react utilizar o JavaScript.
+E os parenteses tem a condição.
+
+ 
+
